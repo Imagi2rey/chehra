@@ -138,7 +138,7 @@ class App extends Component {
     <div className="App">
 
      <ParticlesBg  num={70} 
-     type="circle" bg={true}/>
+     type="lines" bg={true}/>
 
 
 
