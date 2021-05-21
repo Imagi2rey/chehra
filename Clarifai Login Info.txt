@@ -1,6 +1,0 @@
-Username : John Wick
-email : aubin.xaven@wifimaple.com
-Password : Clarifai@1.com
-
-
-API Key :   963b88011ca64201a353a389aa7a370e
