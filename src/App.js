@@ -5,14 +5,11 @@ import Logo from './components/Logo/Logo.js';
 import ImageLinkForm from './components/ImageLinkForm/ImageLinkForm.js';
 import Rank from './components/Rank/Rank.js';
 import ParticlesBg from 'particles-bg';
-import Clarifai from 'clarifai';
 import FaceRecognition from './components/FaceRecognition/FaceRecognition.js';
 import Signin from './components/Signin/Signin.js';
 import Register from './components/Register/Register.js';
 
-const app= new Clarifai.App({
-apiKey : '963b88011ca64201a353a389aa7a370e'
-});
+
 
 
 const initialState = {
@@ -103,17 +100,21 @@ class App extends Component {
 
   onButtonSubmit=()=>{
     this.setState({imageUrl:this.state.input});
-    app.models
-    .predict(
-      Clarifai.FACE_DETECT_MODEL,
-      this.state.input)
+    fetch('http://peaceful-refuge-89924.herokuapp.com/imageUrl',{
+      method : 'post',
+      headers : {'Content-Type' : 'application/json'},
+      body : JSON.stringify({
+        input : this.state.input
+      })
+    })
+    .then(response=>response.json())
     .then(response => {
       if(response) {
         fetch('https://peaceful-refuge-89924.herokuapp.com/image',{
           method : 'put',
           header : {'Content-Type':'application/json'},
           body:JSON.stringify({
-            id:this.state.user.id
+            id: this.state.user.id
           })
         })
         .then(response=>response.json())
